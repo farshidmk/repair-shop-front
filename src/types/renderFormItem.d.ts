@@ -1,17 +1,11 @@
+import { SelectProps } from "@mui/material";
 import { QueryStatus } from "@tanstack/react-query";
 import { SelectHTMLAttributes } from "react";
 import { DatePickerProps, Multiple, Range } from "react-multi-date-picker";
 
 type DefaultFieldValue = Record<string, string>;
 
-type FormInputType =
-  | "text"
-  | "autocomplete"
-  | "checkbox"
-  | "select"
-  | "date"
-  | "password"
-  | "custom";
+type FormInputType = "text" | "autocomplete" | "checkbox" | "select" | "date" | "password" | "custom";
 
 interface FormBaseInput<T = DefaultFieldValue> {
   label: string;
@@ -34,7 +28,7 @@ type SelectOption = {
 
 interface FormSelectInput<T = DefaultFieldValue> extends FormBaseInput<T> {
   inputType: "select";
-  inputProps?: SelectHTMLAttributes<HTMLSelectElement>;
+  inputProps?: SelectProps;
   options: SelectOption[];
   status?: QueryStatus;
   refetch?: () => void;
@@ -69,9 +63,7 @@ interface IDate<T = DefaultFieldValue> extends FormBaseInput<T> {
 //   render: React.ReactElement;
 // }
 
-type FormFieldInput<T = DefaultFieldValue> =
-  | FormTextFieldInput<T>
-  | FormSelectInput<T>;
+type FormFieldInput<T = DefaultFieldValue> = FormTextFieldInput<T> | FormSelectInput<T>;
 // | IDate<T>
 // | ICustomInput<T>;
 

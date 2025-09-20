@@ -1,14 +1,12 @@
 "use client";
 
 import RenderFormItem from "@/components/formItems/RenderFormItem";
-
-import { zodResolver } from "@hookform/resolvers/zod";
+import LoginIcon from "@mui/icons-material/Login";
+import { FormFieldInput } from "@/types/renderFormItem";
+import { Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { LoginWithPasswordForm } from "../login-types";
-import { Loader2 } from "lucide-react";
-import { Button, CircularProgress } from "@mui/material";
-import { FormFieldInput } from "@/types/renderFormItem";
 
 const PasswordLoginForm = () => {
   const router = useRouter();
@@ -26,7 +24,7 @@ const PasswordLoginForm = () => {
   async function onSubmitHandler(values: LoginWithPasswordForm) {}
 
   return (
-    <form onSubmit={handleSubmit(onSubmitHandler)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmitHandler)} className="flex flex-col gap-2">
       {PASSWORD_LOGIN_FORM.map((item) => (
         <Controller
           key={item.name}
@@ -43,7 +41,14 @@ const PasswordLoginForm = () => {
           }}
         />
       ))}
-      <Button className="w-full mt-2" disabled={isSubmitting} endIcon={isSubmitting && <CircularProgress />}>
+      <Button
+        fullWidth
+        sx={{ mt: 0.5, mb: 2 }}
+        variant="contained"
+        color="primary"
+        disabled={isSubmitting}
+        endIcon={isSubmitting ? <CircularProgress /> : <LoginIcon />}
+      >
         ورود
       </Button>
     </form>
