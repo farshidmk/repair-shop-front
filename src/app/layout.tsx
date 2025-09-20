@@ -15,8 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl" className="bg-primary">
-      <body className={`${vazirFont.className} antialiased`}>
-        <ApplicationProviders>{children}</ApplicationProviders>
+      <body className={`${vazirFont.className} antialiased`} suppressHydrationWarning>
+        <div
+          className="relative w-full h-screen bg-cover bg-center"
+          style={{ backgroundImage: "url('/assets/images/main-bg.webp')" }}
+        >
+          <div className="absolute inset-0 z-10 bg-black/70  pointer-events-none" />
+          <div className="relative z-20 h-full">
+            <ApplicationProviders>{children}</ApplicationProviders>
+          </div>
+        </div>
       </body>
     </html>
   );
