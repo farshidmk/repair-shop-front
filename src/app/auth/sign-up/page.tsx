@@ -32,9 +32,6 @@ const LoginPage = () => {
     <Card>
       <CardHeader>ثبت نام</CardHeader>
       <CardContent>
-        {/* {!validatedPhoneNumber ? (
-          <ValidatePhoneNumber />
-        ) : ( */}
         <form onSubmit={handleSubmit(onSubmitHandler)} className="space-y-4">
           {SIGN_UP_FORM_ITEMS.map((item) => (
             <Controller
@@ -57,7 +54,6 @@ const LoginPage = () => {
             ثبت نام
           </Button>
         </form>
-        {/* )} */}
         <Button variant="text">
           <Link href="/auth/login" className="no-underline font-semibold">
             قبلا ثبت نام کرده اید. وارد شوید

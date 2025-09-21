@@ -34,7 +34,7 @@ const PasswordLoginForm = () => {
             return (
               <RenderFormItem
                 {...item}
-                inputProps={{ ...field, ...item.inputProps }}
+                inputProps={{ ...field, ...item.inputProps } as any}
                 error={errors?.[item.name as keyof LoginWithPasswordForm]?.message}
               />
             );

@@ -11,11 +11,10 @@ const LoginPage = () => {
   const [loginType, setLoginType] = useState<"username" | "OTP">("username");
   const router = useRouter();
   return (
-    <div
-      className="w-full rounded-2xl bg-white/50 backdrop-blur-md backdrop-saturate-125 shadow-xl p-4 border-2 border-secondary"
-      // style="-webkit-backdrop-filter: blur(12px);"
-    >
-      <Typography variant="h6">ورود به سایت</Typography>
+    <div>
+      <Typography variant="h6" textAlign={"center"} color="primary">
+        ورود به سایت
+      </Typography>
       <CardContent>
         {loginType === "username" ? <PasswordLoginForm /> : <OtpLoginForm />}
 

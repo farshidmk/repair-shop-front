@@ -43,11 +43,13 @@ const OtpLoginForm = () => {
               return (
                 <RenderFormItem
                   {...item}
-                  inputProps={{
-                    ...field,
-                    ...item.inputProps,
-                    disabled: isOtpSend,
-                  }}
+                  inputProps={
+                    {
+                      ...field,
+                      ...item.inputProps,
+                      disabled: isOtpSend,
+                    } as any
+                  }
                   error={errors?.[item.name as keyof LoginWithOTPForm]?.message}
                 />
               );
