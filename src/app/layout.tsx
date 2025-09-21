@@ -3,6 +3,13 @@ import "./globals.css";
 import { vazirFont } from "@/ui/font";
 import ApplicationProviders from "@/providers/ApplicationProviders";
 
+declare module "axios" {
+  // Override AxiosRequestConfig to restrict method to 'post'
+  interface AxiosRequestConfig {
+    method?: Method;
+  }
+}
+
 export const metadata: Metadata = {
   title: "برنامه مدیریت تعمیرگاه",
   description: "مدیریت تعمیرگاه ماشین",

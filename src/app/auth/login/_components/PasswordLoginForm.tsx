@@ -7,9 +7,12 @@ import { Button, CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { LoginWithPasswordForm } from "../login-types";
+import { useMutation } from "@tanstack/react-query";
+import { ServerCall } from "@/types/server";
 
 const PasswordLoginForm = () => {
   const router = useRouter();
+  const { mutate, isPending } = useMutation<ServerCall, Error, ServerCall>({});
   const {
     control,
     handleSubmit,
@@ -21,7 +24,20 @@ const PasswordLoginForm = () => {
     },
   });
 
-  async function onSubmitHandler(values: LoginWithPasswordForm) {}
+  async function onSubmitHandler(data: LoginWithPasswordForm) {
+    mutate(
+      {
+        method: "post",
+        url: "/auth/login-by-password",
+        data,
+      },
+      {
+        onSuccess: (res) => {
+          console.log(res);
+        },
+      }
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)} className="flex flex-col gap-2">
@@ -42,6 +58,7 @@ const PasswordLoginForm = () => {
         />
       ))}
       <Button
+        type="submit"
         fullWidth
         sx={{ mt: 0.5, mb: 2 }}
         variant="contained"

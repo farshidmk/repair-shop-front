@@ -1,5 +1,6 @@
+import { ServerCall } from "@/types/server";
 import { QueryFunction, QueryKey } from "@tanstack/react-query";
-import axios, { AxiosRequestConfig, AxiosError } from "axios";
+import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3008";
 
@@ -10,9 +11,7 @@ const api = axios.create({
 });
 
 // Generic server call
-export async function serverCall<T = unknown>(
-  config: AxiosRequestConfig
-): Promise<T> {
+export async function serverCall<T = unknown>(config: ServerCall<T>): Promise<T> {
   try {
     const response = await api.request<T>({
       ...config,
@@ -30,14 +29,12 @@ export async function serverCall<T = unknown>(
 }
 
 // Mutation wrapper for React Query
-export const mutationRequest = <T = unknown, TVariables = AxiosRequestConfig>(
-  configFn?: (variables: TVariables) => AxiosRequestConfig
+export const mutationRequest = <T = unknown, TVariables = ServerCall>(
+  configFn?: (variables: TVariables) => ServerCall
 ) => {
   return async (variables: TVariables) => {
-    const config = configFn
-      ? configFn(variables)
-      : (variables as AxiosRequestConfig);
-    return await serverCall<T>(config);
+    const config = configFn ? configFn(variables) : (variables as ServerCall);
+    return await serverCall(config);
   };
 };
 
